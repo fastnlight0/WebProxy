@@ -1,0 +1,16 @@
+{
+  "name": "webdel",
+  "version": "1.0.0",
+  "description": "",
+  "exports": "./app.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node app.mjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "website-scraper": "^5.0.0"
+  }
+}
