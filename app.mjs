@@ -42,3 +42,6 @@ app.get('/rm', function(req, res) {
 
 
 app.listen(process.env.PORT)
+fs.rmSync("public/del", { recursive: true, force: true })
+console.log("Executed rm")
+console.log("WebDel online")
