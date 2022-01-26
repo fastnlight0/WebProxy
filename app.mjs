@@ -3,7 +3,7 @@ import scrape from 'website-scraper'
 import fs from 'fs'
 
 var app = express()
-var url = URL()
+var url = new URL()
 
 app.use(express.static(import.meta.url.split('file://')[1] + '/../public'))
 app.get('/', function (req, res) {
@@ -17,7 +17,7 @@ app.get('/get/*', function (req, res) {
     } else {
         fs.rmSync("public/del", { recursive: true, force: true })
         console.log("Executed rm")
-        url = URL()
+        url = new URL()
         console.log("Starting download on: " + req.url.split("/get/")[1])
         url = new URL(req.url.split("/get/")[1])
         let options = {
@@ -37,7 +37,7 @@ app.get('/get/*', function (req, res) {
 
 app.get('/rm', function (req, res) {
     fs.rmSync("public/del", { recursive: true, force: true })
-    url = URL()
+    url = new URL()
     console.log("Executed rm")
     res.redirect("/")
 })
@@ -54,5 +54,5 @@ app.get('/red/*', function (req, res) {
 app.listen(process.env.PORT)
 fs.rmSync("public/del", { recursive: true, force: true })
 console.log("Executed rm")
-url = ""
+url = new URL()
 console.log("WebDel online")
