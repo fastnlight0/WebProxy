@@ -1,6 +1,7 @@
 import express from 'express'
 import scrape from 'website-scraper'
 import fs from 'fs'
+import process from 'process'
 
 var app = express()
 var url = ""
@@ -46,10 +47,17 @@ app.get('/red/*', function (req, res) {
         res.redirect('/red')
     } else {
         var urlt = new URL(url)
-        res.redirect('/get/' + urlt.protocol + "//" + urlt.hostname+"/"+req.url.split("/red/")[1])
+        res.redirect('/get/' + urlt.protocol + "//" + urlt.hostname + "/" + req.url.split("/red/")[1])
     }
 })
 
+process.on("SIGTERM", () => {
+    console.log("Recieved SIGTERM, starting shutdown")
+    fs.rmSync("public/del", { recursive: true, force: true })
+    console.log("Executed rm")
+    url = ""
+    console.log("WebDel offline")
+})
 
 app.listen(process.env.PORT)
 fs.rmSync("public/del", { recursive: true, force: true })
