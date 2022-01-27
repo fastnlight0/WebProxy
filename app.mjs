@@ -5,10 +5,19 @@ import process from 'process'
 
 var app = express()
 var url = ""
+const actives = ["get", "red", "del", "rm"]
 
 app.use(express.static(import.meta.url.split('file://')[1] + '/../public'))
 app.get('/', function (req, res) {
     res.render('index')
+})
+
+app.get("/*", function (req, res) {
+    if (actives.includes(req.url.split('/')[0])){
+        console.log("Include")
+    } else {
+        console.log("Not")
+    }
 })
 
 app.get('/get/*', function (req, res) {
@@ -51,9 +60,7 @@ app.get('/red/*', function (req, res) {
     }
 })
 
-app.get("/*", function (req, res) {
-    console.log("Anything")
-})
+
 
 process.on("SIGTERM", () => {
     console.log("Recieved SIGTERM, starting shutdown")
