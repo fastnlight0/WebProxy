@@ -62,6 +62,7 @@ app.get("/*", function (req, res, next) {
         next()
     } else {
         console.log("REDIRECTED")
+        console.log(req.url)
         next()
     }
 })
