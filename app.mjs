@@ -55,10 +55,9 @@ app.get('/red/*', function (req, res) {
 })
 app.get("/*", function (req, res, next) {
     if (actives.includes(req.url.split('/')[1])){
-        console.log("Include")
         next()
     } else {
-        console.log(req.url.split('/')[1])
+        res.redirect('/red'+req.url)
     }
 })
 
