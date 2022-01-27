@@ -16,7 +16,7 @@ app.get("/*", function (req, res) {
     if (actives.includes(req.url.split('/')[0])){
         console.log("Include")
     } else {
-        console.log(req.url)
+        console.log(req.url.split('/')[1])
     }
 })
 
