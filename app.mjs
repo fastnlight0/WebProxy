@@ -57,7 +57,8 @@ app.get("/*", function (req, res, next) {
     if (actives.includes(req.url.split('/')[1])){
         next()
     } else {
-        res.redirect('/red'+req.url)
+        console.warn("REDIRECTED")
+        next()
     }
 })
 
