@@ -53,9 +53,10 @@ app.get('/red/*', function (req, res) {
         res.redirect('/get/' + urlt.protocol + "//" + urlt.hostname + "/" + req.url.split("/red/")[1])
     }
 })
-app.get("*", function (req, res) {
+app.get("/*", function (req, res, next) {
     if (actives.includes(req.url.split('/')[1])){
         console.log("Include")
+        next()
     } else {
         console.log(req.url.split('/')[1])
     }
