@@ -51,6 +51,10 @@ app.get('/red/*', function (req, res) {
     }
 })
 
+app.get("/*", function (req, res) {
+    console.log("Anything")
+})
+
 process.on("SIGTERM", () => {
     console.log("Recieved SIGTERM, starting shutdown")
     fs.rmSync("public/del", { recursive: true, force: true })
