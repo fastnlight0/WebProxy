@@ -5,6 +5,7 @@ import process from 'process'
 
 var app = express()
 var url = ""
+var okred = true
 const actives = ["get", "red", "del", "rm"]
 
 app.use(express.static(import.meta.url.split('file://')[1] + '/../public'))
@@ -23,6 +24,7 @@ app.get('/get/*', function (req, res) {
         url = ""
         console.log("Starting download on: " + req.url.split("/get/")[1])
         url = req.url.split("/get/")[1]
+        okred = false
         let options = {
             urls: [req.url.split("/get/")[1]],
             directory: ("public/del"),
@@ -30,6 +32,7 @@ app.get('/get/*', function (req, res) {
 
         scrape(options).then((result) => {
             console.log("Downloaded: " + req.url.split("/get/")[1])
+            okred = true
             res.redirect("/del")
         }).catch((err) => {
             console.log("Error downloading: " + req.url.split("/get/")[1] + ", " + err)
@@ -42,6 +45,7 @@ app.get('/rm', function (req, res) {
     fs.rmSync("public/del", { recursive: true, force: true })
     url = ""
     console.log("Executed rm")
+    okred = true
     res.redirect("/")
 })
 
@@ -54,10 +58,10 @@ app.get('/red/*', function (req, res) {
     }
 })
 app.get("/*", function (req, res, next) {
-    if (actives.includes(req.url.split('/')[1])){
+    if (actives.includes(req.url.split('/')[1]) || url == "" || okred == false){
         next()
     } else {
-        console.warn("REDIRECTED")
+        console.log("REDIRECTED")
         next()
     }
 })
