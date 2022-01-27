@@ -12,13 +12,7 @@ app.get('/', function (req, res) {
     res.render('index')
 })
 
-app.get("/*", function (req, res) {
-    if (actives.includes(req.url.split('/')[0])){
-        console.log("Include")
-    } else {
-        console.log(req.url.split('/')[1])
-    }
-})
+
 
 app.get('/get/*', function (req, res) {
     if (req.url == "/get/") {
@@ -59,7 +53,13 @@ app.get('/red/*', function (req, res) {
         res.redirect('/get/' + urlt.protocol + "//" + urlt.hostname + "/" + req.url.split("/red/")[1])
     }
 })
-
+app.get("*", function (req, res) {
+    if (actives.includes(req.url.split('/')[1])){
+        console.log("Include")
+    } else {
+        console.log(req.url.split('/')[1])
+    }
+})
 
 
 process.on("SIGTERM", () => {
