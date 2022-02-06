@@ -41,7 +41,7 @@ app.get('/rm', function (req, res) {
     fs.rmSync("public/del", { recursive: true, force: true })
     url = ""
     console.log("Executed rm")
-    res.send("<script>window.close()</script>")
+    res.redirect('/')
 })
 
 app.get('/red/*', function (req, res) {
