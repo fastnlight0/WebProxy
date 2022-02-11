@@ -60,11 +60,11 @@ process.on("SIGTERM", () => {
     fs.rmSync("public/del", { recursive: true, force: true })
     console.log("Executed rm")
     url = ""
-    console.log("WebDel offline")
+    console.log("WebProxy offline")
 })
 
-app.listen(process.env.PORT)
+app.listen(process.env.PORT) // Put the port here
 fs.rmSync("public/del", { recursive: true, force: true })
 console.log("Executed rm")
 url = ""
-console.log("WebDel online")
+console.log("WebProxy online")
